@@ -61,7 +61,7 @@ function _hydro_host --on-event fish_prompt
   set --query _hydro_host_prompt && return 
   env | grep SSH_CLIENT 2>/dev/null
   if [ $status -eq 0 ]
-    set --global _hydro_host_prompt "@"(hostname)
+    set --global _hydro_host_prompt (hostname)"@"
   else
     set --global _hydro_host_prompt ""
   end
