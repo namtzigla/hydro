@@ -57,6 +57,17 @@ function _hydro_postexec --on-event fish_postexec
     set --global _hydro_cmd_duration "$out "
 end
 
+function _hydro_host --on-event fish_prompt
+  set --query _hydro_host_prompt && return 
+  env | grep SSH_CLIENT  || 
+  if [ $status -eq 0 ]
+    set --global _hydro_host_prompt (hostname)
+  else
+    set --global _hydro_host_prompt ""
+  end
+end
+
+
 function _hydro_prompt --on-event fish_prompt
     set --query _hydro_status || set --global _hydro_status "$_hydro_newline$_hydro_color_prompt$hydro_symbol_prompt"
     set --query _hydro_pwd || _hydro_pwd
